@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Todo List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlJKRp9J/h9goxvKx8s/8W8t5q/l3l2X3P3s0d/VjQx6t4u2i7F/P4w5C2r5W5q7w5C2r5X/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <h1>My Animated Todo List</h1>
+        <div class="input-section">
+            <input type="text" id="todo-input" placeholder="Add a new task..." aria-label="New todo item">
+            <button id="add-todo-btn" aria-label="Add todo"><i class="fas fa-plus"></i></button>
+        </div>
+        <ul id="todo-list" aria-live="polite">
+            <!-- Todo items will be injected here -->
+        </ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
