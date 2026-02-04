@@ -1,0 +1,300 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #6C63FF; /* A vibrant purple */
+    --secondary-color: #8C86FF; /* Lighter purple */
+    --accent-color: #FF6B6B; /* Red for delete */
+    --success-color: #28B463; /* Green for complete */
+    --background-light: #F4F7FC;
+    --text-dark: #333;
+    --text-light: #fefefe;
+    --card-bg: #ffffff;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --shadow-light: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    --shadow-md: rgba(0, 0, 0, 0.15) 0px 8px 24px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align at the top, not center */
+    padding: 2rem 1rem;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 3rem; /* Push it down a bit from the very top */
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.input-section {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+#todo-input {
+    flex-grow: 1;
+    padding: 0.9rem 1.2rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#todo-input::placeholder {
+    color: #b0b0b0;
+}
+
+#todo-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+#add-todo-btn {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.9rem 1.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 50px;
+}
+
+#add-todo-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#add-todo-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--background-light);
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-light);
+    transition: all 0.4s ease-in-out; /* For general property changes */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-text {
+    flex-grow: 1;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    margin-right: 1rem; /* Space between text and buttons */
+    word-break: break-word; /* Ensure long words wrap */
+}
+
+.todo-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.action-btn.complete-btn {
+    color: var(--primary-color);
+}
+
+.action-btn.complete-btn:hover {
+    background-color: rgba(108, 99, 255, 0.1);
+    color: var(--success-color);
+}
+
+.todo-item.completed .action-btn.complete-btn {
+    color: var(--success-color);
+}
+
+.action-btn.delete-btn {
+    color: var(--accent-color);
+}
+
+.action-btn.delete-btn:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #E74C3C; /* Darker red */
+}
+
+/* Animations */
+
+/* For newly added items */
+.todo-item.entering {
+    animation: fadeInSlideUp 0.4s ease-out forwards;
+}
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* For items being deleted */
+.todo-item.exiting {
+    animation: fadeOutSlideUp 0.4s ease-in forwards;
+}
+@keyframes fadeOutSlideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        height: auto; /* Required for height transition */
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+        height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow: hidden; /* Hide overflow during collapse */
+    }
+}
+
+/* For completion / uncompletion */
+.todo-item.completing .todo-text {
+    /* Apply animation based on whether it's completed or not */
+    animation: var(--text-completion-animation) 0.4s ease-out forwards;
+}
+
+.todo-item.completed.completing .todo-text {
+    --text-completion-animation: strikethroughPulse;
+}
+
+.todo-item:not(.completed).completing .todo-text {
+    --text-completion-animation: removeStrikethroughPulse;
+}
+
+@keyframes strikethroughPulse {
+    0% { color: var(--text-dark); text-decoration-color: transparent; }
+    50% { color: var(--success-color); text-decoration-color: var(--success-color); }
+    100% { color: #888; text-decoration: line-through; text-decoration-color: #888; }
+}
+@keyframes removeStrikethroughPulse {
+    0% { color: #888; text-decoration: line-through; text-decoration-color: #888; }
+    50% { color: var(--success-color); text-decoration-color: var(--success-color); }
+    100% { color: var(--text-dark); text-decoration: none; text-decoration-color: transparent; }
+}
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .input-section {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #todo-input {
+        padding: 0.8rem 1rem;
+    }
+
+    #add-todo-btn {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        width: 100%; /* Make button full width */
+    }
+
+    .todo-item {
+        flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+        padding: 0.8rem 1rem;
+    }
+
+    .todo-text {
+        width: calc(100% - 70px); /* Give text almost full width minus buttons */
+        margin-bottom: 0.5rem; /* Add space below text if it wraps */
+    }
+    .todo-actions {
+        width: 100%;
+        justify-content: flex-end; /* Push buttons to the right */
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    body {
+        padding: 0;
+        align-items: stretch;
+    }
+}
